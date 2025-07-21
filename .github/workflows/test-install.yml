@@ -32,7 +32,7 @@ jobs:
       #     docker ps
 
       - name: Checkout ab-cli
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -44,7 +44,7 @@ jobs:
         run: npm i
 
       - name: Initialize docker swarm
-        run: docker swarm init --advertise-addr 127.0.0.1
+        run: docker swarm init 
 
       - name: Install AppBuilder
         run: node index.js install ab-test --stack=ab-test --develop --port=80 --tag=latest --dbExpose=true --dbPort=8888 --dbPassword=root --authType=login --relayEnabled=false --siteURL=http://localhost:80 --tenant.username=admin --tenant.password=admin --tenant.email=admin@email.com --tenant.url=http://localhost:80
@@ -69,35 +69,6 @@ jobs:
       - name: Take Down Main Stack
         run: ./Down.sh
         working-directory: ./ab-test
-
-      # - name: Setup Test Stack
-      #   working-directory: ./ab-test
-      #   run: node ../index.js test setup ab
-
-      # - name: Launch Test Stack
-      #   working-directory: ./ab-test
-      #   run: npm run test:boot && node ../index.js test waitBoot ab
-      #
-      # - run: npm install pm2@latest -g
-      # - name: Save Logs
-      #   run: pm2 start ./logs.js -- --toFile logs/ABServices.log
-      #   working-directory: ./ab-test
-      #
-      # - name: Wait for AB (Test Stack)
-      #   uses: ifaxity/wait-on-action@v1
-      #   with:
-      #     resource: http://localhost:8088
-      #     timeout: 300000
-      #
-      # - name: Run Cypress Tests (Test Stack)
-      #   run: npm run test:e2e:ab-runtime -- --browser chrome
-      #   working-directory: ./ab-test
-      #
-      # - uses: actions/upload-artifact@v2
-      #   if: failure()
-      #   with:
-      #     name: cypress-screenshots
-      #     path: ./ab-test/test/e2e/cypress/screenshots
 
       - uses: actions/upload-artifact@v4
         if: failure()

@@ -1,6 +1,6 @@
 ![Tests](https://github.com/CruGlobal/ab-cli/actions/workflows/test-install.yml/badge.svg)
 
-A command line helper for our AppBuilder development.
+Command line helper for our AppBuilder development.
 
 # Installation
 
