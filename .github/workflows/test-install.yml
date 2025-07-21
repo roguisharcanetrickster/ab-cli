@@ -57,6 +57,8 @@ jobs:
         working-directory: ./ab-test
 
       - run: docker service ls
+      - run: sleep 60
+      - run: docker service ls
 
       - name: Wait for AB (Main Stack)
         uses: ifaxity/wait-on-action@v1
